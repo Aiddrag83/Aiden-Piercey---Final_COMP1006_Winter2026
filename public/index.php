@@ -25,3 +25,5 @@ require_once __DIR__ . '/config.php'; // Make sure config.php path is correct
     <?php else: ?>
         <p>You are not logged in. Please <a href="public/login.php">login</a>.</p>
     <?php endif; ?>
+</body>
+</html>
