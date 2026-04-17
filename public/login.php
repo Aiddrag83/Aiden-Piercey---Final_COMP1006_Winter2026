@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../config.php'; // Make sure config.php path is correct
-
+require_once 'auth.php';
 $error = '';
 
 // Handle form submission

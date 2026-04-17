@@ -8,7 +8,6 @@
     display clear success and error messages to the user //
 <?php
 session_start();
-require_once __DIR__ . '/config.php'; // Make sure config.php path is correct
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,14 +22,16 @@ require_once __DIR__ . '/config.php'; // Make sure config.php path is correct
         <p>Hello, <?php echo htmlspecialchars($_SESSION['username']); ?>! You are logged in.</p>
         <a href="logout.php">Logout</a>
     <?php else: ?>
-        <p>You are not logged in. Please <a href="public/login.php">login</a>.</p>
+        <p>Please <a href="login.php">login</a> to access the dashboard.</p>
     <?php endif; ?>
+
 </body>
 </html>
 
-//PDO validation
+
 <?php
-try {session_start();
+try {
+
     $pdo = new PDO("mysql:host=localhost;dbname=gallery_db", "root", "");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
