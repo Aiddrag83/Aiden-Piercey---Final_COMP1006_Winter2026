@@ -27,3 +27,16 @@ require_once __DIR__ . '/config.php'; // Make sure config.php path is correct
     <?php endif; ?>
 </body>
 </html>
+
+//PDO validation
+<?php
+try {session_start();
+    $pdo = new PDO("mysql:host=localhost;dbname=gallery_db", "root", "");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $username = trim($_POST['username']);
+        $password = $_POST['password'];
+
+        if (empty($username) || empty($password)) {
+            throw new Exception("Username and password are required.");
+        }
