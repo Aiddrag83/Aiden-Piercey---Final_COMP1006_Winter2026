@@ -1,6 +1,5 @@
 //Used to edit photos in the database and folder
 <?php
-require_once 'auth.php';
 ?>
 <?php
 session_start();

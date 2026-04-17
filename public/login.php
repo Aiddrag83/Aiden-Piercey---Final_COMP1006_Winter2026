@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'auth.php';
+
 $error = '';
 
 // Handle form submission

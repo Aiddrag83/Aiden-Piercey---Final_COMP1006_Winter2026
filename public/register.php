@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../config.php'; // Adjust path if needed
+
 
 $error = '';
 $success = '';
@@ -46,21 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($stmt->num_rows > 0) {
                 $error = "Username already taken.";
-            } else {
-                // Optional file upload
-                $upload_file = null;
-                if (isset($_FILES['profile_file']) && $_FILES['profile_file']['error'] === UPLOAD_ERR_OK) {
-                    $upload_dir = __DIR__ . '/../uploads/';
-                    if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
 
-                    $file_name = basename($_FILES['profile_file']['name']);
-                    $target_file = $upload_dir . $file_name;
-
-                    if (move_uploaded_file($_FILES['profile_file']['tmp_name'], $target_file)) {
-                        $upload_file = $file_name;
-                    } else {
-                        $error = "Failed to upload file.";
-                    }
                 }
 
                 if (empty($error)) {
@@ -78,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $conn->close();
         }
     }
-}
 ?>
 
 <!DOCTYPE html>
@@ -118,11 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
                         </div>
 
-                        <!-- Optional file upload -->
-                        <div class="mb-3">
-                            <label for="profile_file" class="form-label">Profile File (optional)</label>
-                            <input type="file" name="profile_file" id="profile_file" class="form-control">
-                        </div>
 
                         <!-- reCAPTCHA -->
                         <div class="mb-3">
