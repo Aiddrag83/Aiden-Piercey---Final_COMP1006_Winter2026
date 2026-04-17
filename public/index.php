@@ -40,3 +40,19 @@ try {session_start();
         if (empty($username) || empty($password)) {
             throw new Exception("Username and password are required.");
         }
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['username'] = $username;
+            header("Location: index.php");
+            exit();
+        } else {
+            throw new Exception("Invalid username or password.");
+        }
+    }
+} catch (Exception $e) {
+    echo "<p>Error: " . $e->getMessage() . "</p>";
+}
+?>
