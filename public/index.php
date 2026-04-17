@@ -1,0 +1,27 @@
+    // validate all form input on the server, including ensuring no empty fields are submitted, and that the proper email format is given 
+    hash passwords before storing them and verify passwords using password_verify( ) during login
+    use sessions to restrict access to logged-in admins only
+    validate uploaded files and restrict uploads to image types
+    store uploaded images in an uploads/ folder
+    store image file paths in the database
+    use PDO prepared statements for all database operations
+    display clear success and error messages to the user //
+<?php
+session_start();
+require_once __DIR__ . '/config.php'; // Make sure config.php path is correct
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome to the Exam Gallery App!</h1>
+    <?php if (isset($_SESSION['username'])): ?>
+        <p>Hello, <?php echo htmlspecialchars($_SESSION['username']); ?>! You are logged in.</p>
+        <a href="logout.php">Logout</a>
+    <?php else: ?>
+        <p>You are not logged in. Please <a href="public/login.php">login</a>.</p>
+    <?php endif; ?>
